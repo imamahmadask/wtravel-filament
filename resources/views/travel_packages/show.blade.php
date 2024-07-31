@@ -13,8 +13,8 @@
                             <div class="islands__data">
                                 <h2 class="islands__subtitle">Explore</h2>
                                 <h1 class="islands__title">{{ $travel_package->title }}</h1>
-                                <h4 class="islands__subtitle">Start From US$
-                                    <mark><strong>{{ number_format($travel_package->price) }}</strong></mark>
+                                <h4 class="islands__subtitle">Start From
+                                    <mark><strong>{{ number_format($travel_package->price) }}</strong> IDR</mark>
                                 </h4>
                             </div>
                         </div>
