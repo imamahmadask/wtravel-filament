@@ -6,6 +6,7 @@ use App\Filament\Resources\TravelPackageResource\Pages;
 use App\Filament\Resources\TravelPackageResource\RelationManagers;
 use App\Models\TravelPackage;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -34,9 +35,9 @@ class TravelPackageResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->placeholder('City Tour'),
-                TextInput::make('type')
-                    ->required()
-                    ->placeholder('3D2N'),
+                TextInput::make('slug')
+                    ->disabled()
+                    ->dehydrated(),
                 Select::make('country')
                     ->options([
                         'Indonesia' => 'Indonesia',
@@ -53,13 +54,21 @@ class TravelPackageResource extends Resource
                         ->afterStateUpdated(function (Set $set, $state) {
                             $set('slug', Str::slug($state));
                         }),
-                TextInput::make('slug')
-                    ->disabled()
-                    ->dehydrated(),
+                TextInput::make('type')
+                    ->required()
+                    ->placeholder('3D2N'),
                 TextInput::make('price')
                     ->numeric()
                     ->inputMode('decimal'),
-                RichEditor::make('description')->columnSpan(2)
+                RichEditor::make('description')
+                    ->columnSpan(2),
+                FileUpload::make('images')
+                    ->required()
+                    ->multiple()
+                    ->image()
+                    ->directory('travel-package-images')
+                    ->maxSize(1024)
+                    ->columnSpan(2),
             ]);
     }
 

@@ -44,10 +44,16 @@ class BlogResource extends Resource
                 TextInput::make('slug')
                     ->disabled()
                     ->dehydrated(),
-                Textarea::make('excerpt')->required(),
-                Select::make('category_id')->required()
+                Textarea::make('excerpt')
+                    ->required(),
+                Select::make('category_id')
+                    ->required()
                     ->relationship(name: 'category', titleAttribute: 'title'),
-                FileUpload::make('image')->required()->columnSpan(2),
+                FileUpload::make('image')
+                    ->required()
+                    ->directory('blog-images')
+                    ->maxSize(1024)
+                    ->columnSpan(2),
                 RichEditor::make('description')->required()->columnSpan(2),
             ]);
     }
@@ -57,9 +63,16 @@ class BlogResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title'),
-                TextColumn::make('excerpt')->wrap(),
+                TextColumn::make('excerpt')
+                    ->limit(25),
                 TextColumn::make('category.title'),
                 ImageColumn::make('image'),
+                TextColumn::make('created_at')
+                    ->since()
+                    ->dateTimeTooltip(),
+                TextColumn::make('updated_at')
+                    ->since()
+                    ->dateTimeTooltip(),
             ])
             ->filters([
                 //
