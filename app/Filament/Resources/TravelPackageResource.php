@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\TravelPackageResource\Pages;
 use App\Filament\Resources\TravelPackageResource\RelationManagers;
 use App\Models\TravelPackage;
@@ -14,6 +15,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Str;
 use Filament\Tables\Table;
@@ -59,30 +61,14 @@ class TravelPackageResource extends Resource
                 TextInput::make('price')
                     ->numeric()
                     ->inputMode('decimal'),
-                RichEditor::make('description')
-                    ->toolbarButtons([
-                        'attachFiles',
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'h2',
-                        'h3',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'underline',
-                        'undo',
-                    ])
-                    ->columnSpan(2),
                 FileUpload::make('images')
                     ->required()
                     ->multiple()
                     ->image()
                     ->directory('travel-package-images')
                     ->maxSize(1024)
+                    ->columnSpan(2),
+                TinyEditor::make('description')
                     ->columnSpan(2),
             ]);
     }
@@ -96,6 +82,12 @@ class TravelPackageResource extends Resource
                 TextColumn::make('location'),
                 TextColumn::make('country'),
                 TextColumn::make('price'),
+                ImageColumn::make('images')
+                ->circular()
+                ->stacked()
+                ->ring(2)
+                ->limit(3)
+                ->limitedRemainingText(),
             ])
             ->filters([
                 //
