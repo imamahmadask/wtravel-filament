@@ -34,6 +34,10 @@ class TravelPackageResource extends Resource
             ->schema([
                 TextInput::make('title')
                     ->required()
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function (Set $set, $state) {
+                        $set('slug', Str::slug($state));
+                    })
                     ->placeholder('City Tour'),
                 TextInput::make('slug')
                     ->disabled()
@@ -48,12 +52,7 @@ class TravelPackageResource extends Resource
                     ]),
                 TextInput::make('location')
                     ->required()
-                        ->placeholder('Lombok')
-                        ->maxLength(255)
-                        ->live(onBlur: true)
-                        ->afterStateUpdated(function (Set $set, $state) {
-                            $set('slug', Str::slug($state));
-                        }),
+                    ->placeholder('Lombok'),
                 TextInput::make('type')
                     ->required()
                     ->placeholder('3D2N'),
@@ -61,6 +60,22 @@ class TravelPackageResource extends Resource
                     ->numeric()
                     ->inputMode('decimal'),
                 RichEditor::make('description')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
                     ->columnSpan(2),
                 FileUpload::make('images')
                     ->required()
