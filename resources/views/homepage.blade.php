@@ -13,7 +13,7 @@
                         <div class="islands__container container">
                             <div class="islands__data" style="z-index: 99; position: relative">
                                 <h2 class="islands__subtitle">
-                                    <img src="/images/logo_putih.png" alt="">
+                                    <img src="images/favicon.png" alt="">
                                 </h2>
                                 <h1 class="islands__title">
                                     West Travel Indonesia
