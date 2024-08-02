@@ -17,6 +17,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
@@ -62,23 +63,29 @@ class BlogResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title'),
+                TextColumn::make('title')
+                    ->searchable(),
                 TextColumn::make('excerpt')
                     ->limit(25),
                 TextColumn::make('category.title'),
                 ImageColumn::make('image'),
                 TextColumn::make('created_at')
                     ->since()
-                    ->dateTimeTooltip(),
+                    ->dateTimeTooltip()
+                    ->sortable(),
                 TextColumn::make('updated_at')
                     ->since()
-                    ->dateTimeTooltip(),
+                    ->dateTimeTooltip()
+                    ->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                SelectFilter::make('category_id')
+                    ->relationship('category', 'title')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

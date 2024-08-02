@@ -17,6 +17,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Str;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -77,23 +78,36 @@ class TravelPackageResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title'),
+                TextColumn::make('title')
+                    ->searchable(),
                 TextColumn::make('type'),
-                TextColumn::make('location'),
+                TextColumn::make('location')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('country'),
                 TextColumn::make('price'),
                 ImageColumn::make('images')
-                ->circular()
-                ->stacked()
-                ->ring(2)
-                ->limit(3)
-                ->limitedRemainingText(),
+                    ->circular()
+                    ->stacked()
+                    ->ring(2)
+                    ->limit(3)
+                    ->limitedRemainingText(),
             ])
+            ->defaultSort('title', 'asc')
             ->filters([
-                //
+                SelectFilter::make('country')
+                    ->options([
+                        'Indonesia' => 'Indonesia',
+                        'Malaysia' => 'Malaysia',
+                        'Singapore' => 'Singapore',
+                        'Thailand' => 'Thailand',
+                        'Japan' => 'Japan',
+                    ])
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
