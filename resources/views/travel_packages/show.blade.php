@@ -74,7 +74,7 @@
                                 <small> <i class='bx bxs-flag-alt'></i> {{ $travel_package->country }}</small> <br>
                                 Start From
                                 <h2 class="popular__price">
-                                    <span>US$ </span>{{ number_format($travel_package->price, 2) }}
+                                    {{ number_format($travel_package->price, 2) }} <span>IDR</span>
                                 </h2>
                                 <h3 class="popular__title">{{ $travel_package->title }}</h3>
                                 <p class="popular__description">{{ $travel_package->type }}</p>
