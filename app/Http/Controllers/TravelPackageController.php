@@ -9,7 +9,7 @@ class TravelPackageController extends Controller
 {
     public function index()
     {
-        $travel_packages = TravelPackage::all();
+        $travel_packages = TravelPackage::orderBy('created_at', 'desc')->get();
 
         return view('travel_packages.index', compact('travel_packages'));
     }

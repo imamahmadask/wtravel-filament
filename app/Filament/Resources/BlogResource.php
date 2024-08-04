@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
@@ -44,18 +45,23 @@ class BlogResource extends Resource
                     }),
                 TextInput::make('slug')
                     ->disabled()
+                    ->required()
                     ->dehydrated(),
                 Textarea::make('excerpt')
-                    ->required(),
+                    ->required()
+                    ->columnSpan(2),
                 Select::make('category_id')
                     ->required()
-                    ->relationship(name: 'category', titleAttribute: 'title'),
+                    ->relationship(name: 'category', titleAttribute: 'title')
+                    ->columnSpan(2),
                 FileUpload::make('image')
                     ->required()
                     ->directory('blog-images')
                     ->maxSize(1024)
                     ->columnSpan(2),
-                RichEditor::make('description')->required()->columnSpan(2),
+                TinyEditor::make('description')
+                    ->required()
+                    ->columnSpan(2),
             ]);
     }
 
@@ -64,9 +70,8 @@ class BlogResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->searchable(),
-                TextColumn::make('excerpt')
-                    ->limit(25),
+                    ->searchable()
+                    ->wrap(),
                 TextColumn::make('category.title'),
                 ImageColumn::make('image'),
                 TextColumn::make('created_at')

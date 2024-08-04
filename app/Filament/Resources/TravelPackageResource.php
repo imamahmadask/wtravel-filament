@@ -45,14 +45,9 @@ class TravelPackageResource extends Resource
                 TextInput::make('slug')
                     ->disabled()
                     ->dehydrated(),
-                Select::make('country')
-                    ->options([
-                        'Indonesia' => 'Indonesia',
-                        'Malaysia' => 'Malaysia',
-                        'Singapore' => 'Singapore',
-                        'Thailand' => 'Thailand',
-                        'Japan' => 'Japan',
-                    ]),
+                TextInput::make('country')
+                    ->required()
+                    ->placeholder('Indonesia'),
                 TextInput::make('location')
                     ->required()
                     ->placeholder('Lombok'),
