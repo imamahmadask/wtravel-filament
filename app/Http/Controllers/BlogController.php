@@ -22,7 +22,7 @@ class BlogController extends Controller
                 ->where('category_id', $blog->category_id)
                 ->get();
         $categories = Category::get();
-        $travel_packages = TravelPackage::all()->take(2);
+        $travel_packages = TravelPackage::orderBy('created_at', 'desc')->get()->take(3);
 
         $blog->incrementReadCount();
 

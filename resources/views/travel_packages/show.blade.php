@@ -61,7 +61,14 @@
                         <a href="{{ route('travel_package.show', $travel_package->slug) }}">
                             <img src="{{ Storage::url($travel_package->images[0]) }}" alt="" class="popular__img" />
                             <div class="popular__data">
-                                <small> <i class='bx bxs-flag-alt'></i> {{ $travel_package->country }}</small> <br>
+                                <small> <i class='bx bxs-flag-alt'></i>
+                                    @if (is_array($travel_package->country) && count($travel_package->country) > 0)
+                                        {{ implode(', ', $travel_package->country) }}
+                                    @else
+                                        {{ $travel_package->country }}
+                                    @endif
+                                </small>
+                                <br>
                                 Start From
                                 <h2 class="popular__price">
                                     {{ number_format($travel_package->price) }} <span>IDR</span>

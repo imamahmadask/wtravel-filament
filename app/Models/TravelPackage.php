@@ -16,6 +16,7 @@ class TravelPackage extends Model
 
     protected $casts = [
         'images' => 'array',
+        'country' => 'array',
     ];
 
     protected static function boot()
