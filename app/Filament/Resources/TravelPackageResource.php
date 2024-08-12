@@ -69,8 +69,12 @@ class TravelPackageResource extends Resource
                     ->multiple()
                     ->image()
                     ->directory('travel-package-images')
-                    ->maxSize(1024)
-                    ->columnSpan(2),
+                    ->maxSize(1024),
+                FileUpload::make('mobile_images')
+                    ->multiple()
+                    ->image()
+                    ->directory('travel-package-images-mobile')
+                    ->maxSize(1024),
                 TinyEditor::make('description')
                     ->columnSpan(2),
             ]);

@@ -5,9 +5,13 @@
     <section>
         <div class="swiper-container gallery-top">
             <div class="swiper-wrapper">
-                @foreach ($travel_package->images as $gallery)
+                @foreach ($travel_package->images as $index => $gallery)
                     <section class="islands swiper-slide">
-                        <img src="{{ Storage::url($gallery) }}" alt="" class="islands__bg" />
+                        <picture>
+                            <source media="(max-width: 500px)"
+                                srcset="{{ Storage::url($travel_package->mobile_images[$index] ?? $gallery) }}">
+                            <img src="{{ Storage::url($gallery) }}" alt="" class="islands__bg" />
+                        </picture>
                     </section>
                 @endforeach
             </div>
@@ -16,8 +20,12 @@
         <!--========== CONTROLS ==========-->
         <div class="controls gallery-thumbs">
             <div class="controls__container swiper-wrapper">
-                @foreach ($travel_package->images as $gallery)
-                    <img src="{{ Storage::url($gallery) }}" alt="" class="controls__img swiper-slide" />
+                @foreach ($travel_package->images as $index => $gallery)
+                    <picture>
+                        <source media="(max-width: 500px)"
+                            srcset="{{ Storage::url($travel_package->mobile_images[$index] ?? $gallery) }}">
+                        <img src="{{ Storage::url($gallery) }}" alt="" class="controls__img swiper-slide" />
+                    </picture>
                 @endforeach
             </div>
         </div>
