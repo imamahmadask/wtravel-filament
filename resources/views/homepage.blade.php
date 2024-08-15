@@ -93,7 +93,7 @@
                 <div class="value__orbe"></div>
 
                 <div class="value__img">
-                    <img src="{{ asset('assets/img/team.jpg') }}" alt="" />
+                    <img src="{{ asset('assets/img/team-new.jpeg') }}" alt="" />
                 </div>
             </div>
 

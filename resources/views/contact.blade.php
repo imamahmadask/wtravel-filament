@@ -31,7 +31,7 @@
             <div class="swiper-wrapper">
                 <!--========== ISLANDS 1 ==========-->
                 <section class="islands swiper-slide">
-                    <img src="{{ asset('assets/img/contact-hero.jpg') }}" alt="" class="islands__bg" />
+                    <img src="{{ asset('assets/img/contact-hero-new.png') }}" alt="" class="islands__bg" />
                     <div class="bg__overlay">
                         <div class="islands__container container">
                             <div class="islands__data">
@@ -50,7 +50,7 @@
                 <div class="contact__orbe"></div>
 
                 <div class="contact__img">
-                    <img src="{{ asset('assets/img/contact.jpg') }}" alt="" />
+                    <img src="{{ asset('assets/img/contact-new.jpeg') }}" alt="" />
                 </div>
             </div>
 
