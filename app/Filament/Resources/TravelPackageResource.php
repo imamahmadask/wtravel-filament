@@ -45,9 +45,16 @@ class TravelPackageResource extends Resource
                 TextInput::make('slug')
                     ->disabled()
                     ->dehydrated(),
-                TextInput::make('country')
-                    ->required()
-                    ->placeholder('Indonesia'),
+                Select::make('country')
+                    ->multiple()
+                    ->options([
+                        'Indonesia' => 'Indonesia',
+                        'Malaysia' => 'Malaysia',
+                        'Singapura' => 'Singapura',
+                        'Thailand' => 'Thailand',
+                        'Vietnam' => 'Vietnam',
+                        'Jepang' => 'Jepang',
+                    ]),
                 TextInput::make('location')
                     ->required()
                     ->placeholder('Lombok'),
@@ -62,8 +69,12 @@ class TravelPackageResource extends Resource
                     ->multiple()
                     ->image()
                     ->directory('travel-package-images')
-                    ->maxSize(1024)
-                    ->columnSpan(2),
+                    ->maxSize(1024),
+                FileUpload::make('mobile_images')
+                    ->multiple()
+                    ->image()
+                    ->directory('travel-package-images-mobile')
+                    ->maxSize(1024),
                 TinyEditor::make('description')
                     ->columnSpan(2),
             ]);
@@ -74,13 +85,16 @@ class TravelPackageResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('type'),
                 TextColumn::make('location')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('country'),
-                TextColumn::make('price'),
+                TextColumn::make('country')
+                    ->searchable(),
+                TextColumn::make('price')
+                    ->numeric(),
                 ImageColumn::make('images')
                     ->circular()
                     ->stacked()
@@ -88,16 +102,8 @@ class TravelPackageResource extends Resource
                     ->limit(3)
                     ->limitedRemainingText(),
             ])
-            ->defaultSort('title', 'asc')
+            ->defaultSort('created_at', 'desc')
             ->filters([
-                SelectFilter::make('country')
-                    ->options([
-                        'Indonesia' => 'Indonesia',
-                        'Malaysia' => 'Malaysia',
-                        'Singapore' => 'Singapore',
-                        'Thailand' => 'Thailand',
-                        'Japan' => 'Japan',
-                    ])
 
             ])
             ->actions([

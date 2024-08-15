@@ -6,7 +6,7 @@
         <div class="swiper-container gallery-top">
             <div class="swiper-wrapper">
                 <section class="islands swiper-slide">
-                    <img src="{{ asset('assets/img/blog-hero.jpg') }}" alt="" class="islands__bg" />
+                    <img src="{{ asset('assets/img/blog-cover.webp') }}" alt="" class="islands__bg" />
 
                     <div class="islands__container container">
                         <div class="islands__data">

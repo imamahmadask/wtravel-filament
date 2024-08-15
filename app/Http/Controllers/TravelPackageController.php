@@ -16,7 +16,8 @@ class TravelPackageController extends Controller
 
     public function show(TravelPackage $travel_package)
     {
-        $travel_packages = TravelPackage::where('id', '!=', $travel_package->id)->get();
+        $travel_packages = TravelPackage::where('id', '!=', $travel_package->id)
+                            ->orderBy('created_at', 'desc')->limit(6)->get();
 
         return view('travel_packages.show', compact('travel_package', 'travel_packages'));
     }

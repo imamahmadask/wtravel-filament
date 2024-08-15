@@ -5,19 +5,13 @@
     <section>
         <div class="swiper-container gallery-top">
             <div class="swiper-wrapper">
-                @foreach ($travel_package->images as $gallery)
+                @foreach ($travel_package->images as $index => $gallery)
                     <section class="islands swiper-slide">
-                        <img src="{{ Storage::url($gallery) }}" alt="" class="islands__bg" />
-
-                        <div class="islands__container container">
-                            <div class="islands__data">
-                                <h2 class="islands__subtitle">Explore</h2>
-                                <h1 class="islands__title">{{ $travel_package->title }}</h1>
-                                <h4 class="islands__subtitle">Start From
-                                    <mark><strong>{{ number_format($travel_package->price) }}</strong> IDR</mark>
-                                </h4>
-                            </div>
-                        </div>
+                        <picture>
+                            <source media="(max-width: 500px)"
+                                srcset="{{ Storage::url($travel_package->mobile_images[$index] ?? $gallery) }}">
+                            <img src="{{ Storage::url($gallery) }}" alt="" class="islands__bg" />
+                        </picture>
                     </section>
                 @endforeach
             </div>
@@ -26,8 +20,12 @@
         <!--========== CONTROLS ==========-->
         <div class="controls gallery-thumbs">
             <div class="controls__container swiper-wrapper">
-                @foreach ($travel_package->images as $gallery)
-                    <img src="{{ Storage::url($gallery) }}" alt="" class="controls__img swiper-slide" />
+                @foreach ($travel_package->images as $index => $gallery)
+                    <picture>
+                        <source media="(max-width: 500px)"
+                            srcset="{{ Storage::url($travel_package->mobile_images[$index] ?? $gallery) }}">
+                        <img src="{{ Storage::url($gallery) }}" alt="" class="controls__img swiper-slide" />
+                    </picture>
                 @endforeach
             </div>
         </div>
@@ -71,10 +69,17 @@
                         <a href="{{ route('travel_package.show', $travel_package->slug) }}">
                             <img src="{{ Storage::url($travel_package->images[0]) }}" alt="" class="popular__img" />
                             <div class="popular__data">
-                                <small> <i class='bx bxs-flag-alt'></i> {{ $travel_package->country }}</small> <br>
+                                <small> <i class='bx bxs-flag-alt'></i>
+                                    @if (is_array($travel_package->country) && count($travel_package->country) > 0)
+                                        {{ implode(', ', $travel_package->country) }}
+                                    @else
+                                        {{ $travel_package->country }}
+                                    @endif
+                                </small>
+                                <br>
                                 Start From
                                 <h2 class="popular__price">
-                                    {{ number_format($travel_package->price, 2) }} <span>IDR</span>
+                                    {{ number_format($travel_package->price) }} <span>IDR</span>
                                 </h2>
                                 <h3 class="popular__title">{{ $travel_package->title }}</h3>
                                 <p class="popular__description">{{ $travel_package->type }}</p>
