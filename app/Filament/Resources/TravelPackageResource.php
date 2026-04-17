@@ -8,11 +8,10 @@ use App\Filament\Resources\TravelPackageResource\RelationManagers;
 use App\Models\TravelPackage;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Forms\Set;
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
@@ -22,6 +21,10 @@ use Illuminate\Support\Str;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 
 class TravelPackageResource extends Resource
 {
@@ -29,9 +32,9 @@ class TravelPackageResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rocket-launch';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $form): Schema
     {
         return $form
             ->schema([
@@ -64,6 +67,18 @@ class TravelPackageResource extends Resource
                 TextInput::make('price')
                     ->numeric()
                     ->inputMode('decimal'),
+                TextInput::make('min_pax'),
+                TextInput::make('disc'),
+                TextInput::make('disc_price')
+                    ->numeric(),
+                Select::make('group_package')
+                    ->options([
+                        'Rinjani Package' => 'Rinjani Package',
+                        'Lombok Package' => 'Lombok Package',
+                        'Gili Package' => 'Gili Package',
+                        'Sembalun Package' => 'Sembalun Package',
+                        'Other' => 'Other',
+                    ]),
                 FileUpload::make('images')
                     ->required()
                     ->multiple()
@@ -93,6 +108,8 @@ class TravelPackageResource extends Resource
                     ->sortable(),
                 TextColumn::make('country')
                     ->searchable(),
+                TextColumn::make('group_package')
+                    ->searchable(),
                 TextColumn::make('price')
                     ->numeric(),
                 ImageColumn::make('images')
@@ -103,16 +120,13 @@ class TravelPackageResource extends Resource
                     ->limitedRemainingText(),
             ])
             ->defaultSort('created_at', 'desc')
-            ->filters([
-
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

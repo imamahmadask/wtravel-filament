@@ -11,7 +11,8 @@ class TravelPackage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'type', 'slug', 'location', 'country', 'price', 'description', 'images', 'mobile_images'
+        'title', 'type', 'slug', 'location', 'country', 'price', 'description', 'images', 'mobile_images',
+        'min_pax', 'disc', 'disc_price', 'group_package'
     ];
 
     protected $casts = [
