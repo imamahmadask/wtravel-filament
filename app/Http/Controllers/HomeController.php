@@ -10,7 +10,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $travel_packages = TravelPackage::orderBy('created_at', 'desc')->get();
+        $travel_packages = TravelPackage::orderBy('created_at', 'desc')
+            ->where('is_active', true)->get();
+        
         $blogs = Blog::get()->take(3);
 
         return view('homepage', compact('travel_packages','blogs'));

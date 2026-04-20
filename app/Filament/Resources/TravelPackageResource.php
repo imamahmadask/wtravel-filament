@@ -10,12 +10,14 @@ use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Str;
 use Filament\Tables\Table;
@@ -66,8 +68,10 @@ class TravelPackageResource extends Resource
                     ->placeholder('3D2N'),
                 TextInput::make('price')
                     ->numeric()
-                    ->inputMode('decimal'),
-                TextInput::make('min_pax'),
+                    ->inputMode('decimal')
+                    ->required(),
+                TextInput::make('min_pax')
+                    ->required(),
                 TextInput::make('disc'),
                 TextInput::make('disc_price')
                     ->numeric(),
@@ -77,8 +81,14 @@ class TravelPackageResource extends Resource
                         'Lombok Package' => 'Lombok Package',
                         'Gili Package' => 'Gili Package',
                         'Sembalun Package' => 'Sembalun Package',
+                        'International Package' => 'International Package',
                         'Other' => 'Other',
-                    ]),
+                    ])
+                    ->required(),
+                Toggle::make('is_active')
+                    ->label('Active')
+                    ->default(true)
+                    ->columnSpan(2),
                 FileUpload::make('images')
                     ->required()
                     ->multiple()
@@ -102,7 +112,8 @@ class TravelPackageResource extends Resource
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('type'),
+                TextColumn::make('type')
+                    ->label('Duration'),
                 TextColumn::make('location')
                     ->searchable()
                     ->sortable(),
@@ -112,14 +123,18 @@ class TravelPackageResource extends Resource
                     ->searchable(),
                 TextColumn::make('price')
                     ->numeric(),
-                ImageColumn::make('images')
-                    ->circular()
-                    ->stacked()
-                    ->ring(2)
-                    ->limit(3)
-                    ->limitedRemainingText(),
+                IconColumn::make('is_active')
+                    ->label('Status')
+                    ->boolean()
+                    ->sortable(),
+                // ImageColumn::make('images')
+                //     ->circular()
+                //     ->stacked()
+                //     ->ring(2)
+                //     ->limit(3)
+                //     ->limitedRemainingText(),
             ])
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('is_active', 'desc')
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
