@@ -52,6 +52,9 @@
                                         @else
                                             {{ $travel_package->country }} <!-- Jika hanya 1 negara atau string biasa -->
                                         @endif
+                                        @if ($travel_package->is_popular)
+                                            <i class='bx bxs-star' style="color: #ffcc00; margin-left: 5px;"></i>
+                                        @endif
                                     </small>
                                     <br>
                                     Start From

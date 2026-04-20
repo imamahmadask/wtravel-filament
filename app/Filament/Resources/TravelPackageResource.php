@@ -77,18 +77,19 @@ class TravelPackageResource extends Resource
                     ->numeric(),
                 Select::make('group_package')
                     ->options([
-                        'Rinjani Package' => 'Rinjani Package',
+                        'Rinjani & Sembalun Package' => 'Rinjani & Sembalun Package',
                         'Lombok Package' => 'Lombok Package',
                         'Gili Package' => 'Gili Package',
-                        'Sembalun Package' => 'Sembalun Package',
                         'International Package' => 'International Package',
                         'Other' => 'Other',
                     ])
                     ->required(),
                 Toggle::make('is_active')
                     ->label('Active')
-                    ->default(true)
-                    ->columnSpan(2),
+                    ->default(true),
+                Toggle::make('is_popular')
+                    ->label('Popular')
+                    ->default(false),
                 FileUpload::make('images')
                     ->required()
                     ->multiple()
@@ -117,12 +118,14 @@ class TravelPackageResource extends Resource
                 TextColumn::make('location')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('country')
-                    ->searchable(),
                 TextColumn::make('group_package')
                     ->searchable(),
                 TextColumn::make('price')
-                    ->numeric(),
+                    ->numeric(),                
+                IconColumn::make('is_popular')
+                    ->label('Popular')
+                    ->boolean()
+                    ->sortable(),
                 IconColumn::make('is_active')
                     ->label('Status')
                     ->boolean()
@@ -133,6 +136,28 @@ class TravelPackageResource extends Resource
                 //     ->ring(2)
                 //     ->limit(3)
                 //     ->limitedRemainingText(),
+            ])
+            ->filters([
+                SelectFilter::make('group_package')
+                    ->options([
+                        'Rinjani & Sembalun Package' => 'Rinjani & Sembalun Package',
+                        'Lombok Package' => 'Lombok Package',
+                        'Gili Package' => 'Gili Package',
+                        'International Package' => 'International Package',
+                        'Other' => 'Other',
+                    ]),
+                SelectFilter::make('is_active')
+                    ->label('Status')
+                    ->options([
+                        '1' => 'Active',
+                        '0' => 'Non Active',
+                    ]),
+                SelectFilter::make('is_popular')
+                    ->label('Popular')
+                    ->options([
+                        '1' => 'Popular',
+                        '0' => 'Non Popular',
+                    ]),
             ])
             ->defaultSort('is_active', 'desc')
             ->recordActions([

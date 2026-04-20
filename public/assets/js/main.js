@@ -10,16 +10,18 @@ const scrollHeader = () => {
 window.addEventListener("scroll", scrollHeader);
 
 /*=============== SWIPER POPULAR ===============*/
-const swiperPopular = new Swiper(".popular__container", {
-    spaceBetween: 32,
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: "auto",
-    loop: true,
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
+document.querySelectorAll(".popular__container").forEach((el) => {
+    new Swiper(el, {
+        spaceBetween: 32,
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        loop: true,
+        navigation: {
+            nextEl: el.querySelector(".swiper-button-next"),
+            prevEl: el.querySelector(".swiper-button-prev"),
+        },
+    });
 });
 
 /*=============== VALUE ACCORDION ===============*/

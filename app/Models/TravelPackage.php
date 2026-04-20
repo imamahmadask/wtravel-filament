@@ -12,7 +12,7 @@ class TravelPackage extends Model
 
     protected $fillable = [
         'title', 'type', 'slug', 'location', 'country', 'price', 'description', 'images', 'mobile_images',
-        'min_pax', 'disc', 'disc_price', 'group_package', 'is_active'
+        'min_pax', 'disc', 'disc_price', 'group_package', 'is_active', 'is_popular'
     ];
 
     protected $casts = [

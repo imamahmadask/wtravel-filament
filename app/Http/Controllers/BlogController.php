@@ -21,8 +21,14 @@ class BlogController extends Controller
         $relatedBlogs = Blog::where('id','!=',$blog->id)
                 ->where('category_id', $blog->category_id)
                 ->get();
+
         $categories = Category::get();
-        $travel_packages = TravelPackage::orderBy('created_at', 'desc')->get()->take(3);
+
+        $travel_packages = TravelPackage::where('is_active', true)
+            ->orderBy('is_popular', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->take(3);
 
         $blog->incrementReadCount();
 

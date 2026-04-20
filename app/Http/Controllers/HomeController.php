@@ -10,8 +10,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $travel_packages = TravelPackage::orderBy('created_at', 'desc')
-            ->where('is_active', true)->get();
+        $orderedGroups = ['International Package', 'Lombok Package', 'Rinjani & Sembalun Package', 'Other'];
+
+        $travel_packages = TravelPackage::whereIn('group_package', $orderedGroups)
+            ->where('is_active', true)
+            ->orderByRaw("FIELD(group_package, '" . implode("','", $orderedGroups) . "')")
+            ->orderBy('is_popular', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
         
         $blogs = Blog::get()->take(3);
 
