@@ -23,6 +23,8 @@ Route::get('about', function() {
     return view('about');
 })->name('about');
 
+Route::get('faq', [\App\Http\Controllers\FaqController::class, 'index'])->name('faq');
+
 // booking
 Route::post('booking', [App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
 

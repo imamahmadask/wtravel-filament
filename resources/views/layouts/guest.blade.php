@@ -115,7 +115,7 @@
 
                     <ul class="footer__links">
                         <li>
-                            <a href="#" class="footer__link">FAQs </a>
+                            <a href="{{ route('faq') }}" class="footer__link">FAQs </a>
                         </li>
                         <li>
                             <a href="/contact" class="footer__link"> Contact Us</a>
