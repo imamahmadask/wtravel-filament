@@ -63,8 +63,13 @@ class BookingResource extends Resource
                 TextEntry::make('name'),
                 TextEntry::make('email'),
                 TextEntry::make('number_phone'),
-                TextEntry::make('date'),
-                TextEntry::make('travel_package.title'),
+                TextEntry::make('date')
+                    ->label('Date')
+                    ->dateTime('d F Y'),
+                TextEntry::make('travel_package.title')
+                    ->label('Travel Package'),
+                TextEntry::make('travel_package.price')
+                    ->money('IDR'),
             ]);
     }
 

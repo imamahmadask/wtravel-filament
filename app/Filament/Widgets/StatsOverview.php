@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Blog;
+use App\Models\Booking;
 use App\Models\Category;
 use App\Models\TravelPackage;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -14,12 +15,14 @@ class StatsOverview extends BaseWidget
     {
         $blog_count = Blog::count('id');
         $travel_count = TravelPackage::count('id');
-        $category = Category::count('id');
+        // $category = Category::count('id');
+        $booking_count = Booking::count('id');
 
         return [
             Stat::make('Package Travel', $travel_count),
+            Stat::make('Booking', $booking_count),
             Stat::make('Blog',$blog_count),
-            Stat::make('Category', $category),
+            // Stat::make('Category', $category),
         ];
     }
 }
