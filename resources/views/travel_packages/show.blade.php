@@ -33,6 +33,17 @@
 
     <section class="blog section" id="blog">
         <div class="blog__container container">
+            <div class="blog__title">
+                <h2 class="section__title">
+                    {{ $travel_package->title }}
+                </h2>
+                <h2>
+                    Starting From IDR <span
+                        style="color: var(--second-color);">{{ number_format($travel_package->price) }}</span>/Pax
+                </h2>
+                <span class="section__subtitle">Duration : {{ $travel_package->type }}</span>
+                <span class="section__subtitle">Minimum Pax : {{ $travel_package->min_pax }} Pax</span>
+            </div>
             <div class="content__container">
                 <div class="blog__detail">
                     {!! $travel_package->description !!}
@@ -67,7 +78,8 @@
                 @foreach ($travel_packages as $travel_package)
                     <article class="popular__card">
                         <a href="{{ route('travel_package.show', $travel_package->slug) }}">
-                            <img src="{{ Storage::url($travel_package->images[0]) }}" alt="" class="popular__img" />
+                            <img src="{{ Storage::url($travel_package->images[0]) }}" alt=""
+                                class="popular__img" />
                             <div class="popular__data">
                                 <small> <i class='bx bxs-flag-alt'></i>
                                     @if (is_array($travel_package->country) && count($travel_package->country) > 0)
@@ -80,12 +92,13 @@
                                     @endif
                                 </small>
                                 <br>
-                                Start From
+                                Starting From
                                 <h2 class="popular__price">
-                                    {{ number_format($travel_package->price) }} <span>IDR</span>
+                                    IDR <span>{{ number_format($travel_package->price) }}</span>/pax
                                 </h2>
                                 <h3 class="popular__title">{{ $travel_package->title }}</h3>
-                                <p class="popular__description">{{ $travel_package->type }}</p>
+                                <p class="popular__description">{{ $travel_package->type }} - (Min.
+                                    {{ $travel_package->min_pax }} Pax)</p>
                             </div>
                         </a>
                     </article>

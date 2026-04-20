@@ -57,12 +57,13 @@
                                         @endif
                                     </small>
                                     <br>
-                                    Start From
+                                    Starting From
                                     <h2 class="popular__price">
-                                        {{ number_format($travel_package->price) }} <span>IDR</span>
+                                        IDR <span>{{ number_format($travel_package->price) }}</span>/pax
                                     </h2>
                                     <h3 class="popular__title">{{ $travel_package->title }}</h3>
-                                    <p class="popular__description">{{ $travel_package->type }}</p>
+                                    <p class="popular__description">{{ $travel_package->type }} - (Min.
+                                        {{ $travel_package->min_pax }} Pax)</p>
                                 </div>
                             </a>
                         </article>

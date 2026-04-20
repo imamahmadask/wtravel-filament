@@ -48,7 +48,6 @@ class TravelPackageResource extends Resource
                     })
                     ->placeholder('City Tour'),
                 TextInput::make('slug')
-                    ->disabled()
                     ->dehydrated(),
                 Select::make('country')
                     ->multiple()
@@ -79,7 +78,6 @@ class TravelPackageResource extends Resource
                     ->options([
                         'Rinjani & Sembalun Package' => 'Rinjani & Sembalun Package',
                         'Lombok Package' => 'Lombok Package',
-                        'Gili Package' => 'Gili Package',
                         'International Package' => 'International Package',
                         'Other' => 'Other',
                     ])
