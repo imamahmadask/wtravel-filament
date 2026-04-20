@@ -115,6 +115,12 @@ body.dark-theme {
     background-color: var(--container-color);
 }
 
+.dark-theme .nav__logo img,
+.dark-theme .footer__logo img,
+.dark-theme .scroll-header .nav__logo img {
+    content: url("/images/logo.png");
+}
+
 .dark-theme::-webkit-scrollbar {
     background-color: hsl(228, 4%, 15%);
 }
