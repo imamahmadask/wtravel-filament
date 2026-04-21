@@ -7,17 +7,27 @@ use Illuminate\Http\Request;
 
 class TravelPackageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orderedGroups = ['International Package', 'Lombok Package', 'Rinjani & Sembalun Package', 'Other'];
+        $orderedGroups = ['International Package', 'Rinjani Package', 'Sembalun Package', 'Lombok Package', 'Honeymoon Package', 'Other'];
 
-        $travel_packages = TravelPackage::whereIn('group_package', $orderedGroups)
-            ->where('is_active', true)
-            ->orderByRaw("FIELD(group_package, '" . implode("','", $orderedGroups) . "')")
+        $selectedGroup = $request->get('group');
+
+        $query = TravelPackage::query()->where('is_active', true);
+
+        if ($selectedGroup && in_array($selectedGroup, $orderedGroups)) {
+            $query->where('group_package', $selectedGroup);
+        } else {
+            $query->whereIn('group_package', $orderedGroups);
+        }
+
+        $travel_packages = $query->orderByRaw("FIELD(group_package, '" . implode("','", $orderedGroups) . "')")
+            ->orderBy('title', 'asc')
+            ->orderBy('is_popular', 'desc')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('travel_packages.index', compact('travel_packages'));
+        return view('travel_packages.index', compact('travel_packages', 'orderedGroups', 'selectedGroup'));
     }
 
     public function show(TravelPackage $travel_package)
@@ -31,5 +41,16 @@ class TravelPackageController extends Controller
             ->get();
 
         return view('travel_packages.show', compact('travel_package', 'travel_packages'));
+    }
+
+    public function group($group)
+    {
+        $travel_packages = TravelPackage::where('group_package', $group)
+            ->where('is_active', true)
+            ->orderBy('is_popular', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('travel_packages.group', compact('travel_packages', 'group'));
     }
 }

@@ -76,9 +76,11 @@ class TravelPackageResource extends Resource
                     ->numeric(),
                 Select::make('group_package')
                     ->options([
-                        'Rinjani & Sembalun Package' => 'Rinjani & Sembalun Package',
-                        'Lombok Package' => 'Lombok Package',
                         'International Package' => 'International Package',
+                        'Lombok Package' => 'Lombok Package',
+                        'Rinjani Package' => 'Rinjani Package',
+                        'Sembalun Package' => 'Sembalun Package',
+                        'Honeymoon Package' => 'Honeymoon Package',
                         'Other' => 'Other',
                     ])
                     ->required(),
@@ -138,10 +140,11 @@ class TravelPackageResource extends Resource
             ->filters([
                 SelectFilter::make('group_package')
                     ->options([
-                        'Rinjani & Sembalun Package' => 'Rinjani & Sembalun Package',
-                        'Lombok Package' => 'Lombok Package',
-                        'Gili Package' => 'Gili Package',
                         'International Package' => 'International Package',
+                        'Lombok Package' => 'Lombok Package',                        
+                        'Rinjani Package' => 'Rinjani Package',
+                        'Sembalun Package' => 'Sembalun Package',
+                        'Honeymoon Package' => 'Honeymoon Package',
                         'Other' => 'Other',
                     ]),
                 SelectFilter::make('is_active')
@@ -157,7 +160,13 @@ class TravelPackageResource extends Resource
                         '0' => 'Non Popular',
                     ]),
             ])
-            ->defaultSort('is_active', 'desc')
+            ->defaultSort(function (Builder $query): Builder {
+                return $query                    
+                    ->orderBy('is_active', 'desc')
+                    ->orderBy('group_package', 'asc')
+                    ->orderBy('title', 'asc')
+                    ->orderBy('created_at', 'desc');
+            })
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),

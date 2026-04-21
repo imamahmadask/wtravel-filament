@@ -8,6 +8,7 @@ Route::get('/', [HomeController::class, 'index'])->name('homepage');
 // travel packages
 Route::get('package/travel-packages',[\App\Http\Controllers\TravelPackageController::class, 'index'])->name('travel_package.index');
 Route::get('package/travel-packages/{travel_package:slug}',[\App\Http\Controllers\TravelPackageController::class, 'show'])->name('travel_package.show');
+Route::get('package/travel-packages/group/{group}', [\App\Http\Controllers\TravelPackageController::class, 'group'])->name('travel_package.group');
 
 // blogs
 Route::get('blogs', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');

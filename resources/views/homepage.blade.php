@@ -35,7 +35,9 @@
             <div class="container">
                 <span class="section__subtitle" style="text-align: center">Best Choice</span>
                 <h2 class="section__title" style="text-align: center">
-                    {{ $group ?: 'Tour Packages' }}
+                    <a href="{{ route('travel_package.group', $group ?: 'Other') }}" style="color: inherit;">
+                        {{ $group ?: 'Tour Packages' }}
+                    </a>
                 </h2>
 
                 <div class="popular__container swiper">
