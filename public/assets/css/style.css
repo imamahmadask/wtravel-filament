@@ -118,7 +118,7 @@ body.dark-theme {
 .dark-theme .nav__logo img,
 .dark-theme .footer__logo img,
 .dark-theme .scroll-header .nav__logo img {
-    content: url("/images/logo.png");
+    content: url("/images/logo.png"); /* Ganti dengan nama file logo putih Anda */
 }
 
 .dark-theme::-webkit-scrollbar {

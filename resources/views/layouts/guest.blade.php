@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/libraries/swiper-bundle.min.css') }}" />
 
     <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ time() }}" />
 
     @stack('style-alt')
     <title>West Travel Indonesia</title>
