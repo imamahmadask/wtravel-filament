@@ -140,14 +140,25 @@
             right: .5rem;
             cursor: pointer;
         }
-
         blockquote {
             border-left: 8px solid #b4b4b4;
             padding-left: 1rem;
         }
 
+        .blog__detail ul {
+            padding-left: 2rem;
+        }
+
         .blog__detail ul li {
-            list-style: initial;
+            list-style: disc;
+        }
+
+        .blog__detail ol {
+            padding-left: 2rem;
+        }
+
+        .blog__detail ol li {
+            list-style: decimal;
         }
     </style>
 @endpush

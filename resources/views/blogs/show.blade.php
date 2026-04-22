@@ -118,8 +118,20 @@
             padding-left: 1rem;
         }
 
+        .blog__detail ul {
+            padding-left: 2rem;
+        }
+
         .blog__detail ul li {
-            list-style: initial;
+            list-style: disc;
+        }
+
+        .blog__detail ol {
+            padding-left: 2rem;
+        }
+
+        .blog__detail ol li {
+            list-style: decimal;
         }
     </style>
 @endpush
