@@ -115,8 +115,7 @@ class TravelPackageResource extends Resource
                     ->sortable(),
                 TextColumn::make('type')
                     ->label('Duration'),
-                TextColumn::make('location')
-                    ->searchable()
+                TextColumn::make('min_pax')
                     ->sortable(),
                 TextColumn::make('group_package')
                     ->searchable(),
