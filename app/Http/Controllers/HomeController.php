@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $orderedGroups = ['International Package', 'Rinjani Package', 'Sembalun Package', 'Lombok Package', 'Honeymoon Package', 'Other'];
+        $orderedGroups = ['International Package', 'Rinjani & Sembalun Package', 'Lombok Package', 'Honeymoon Package', 'Other'];
 
         $travel_packages = TravelPackage::whereIn('group_package', $orderedGroups)
             ->where('is_active', true)

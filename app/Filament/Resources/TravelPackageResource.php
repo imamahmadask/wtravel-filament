@@ -78,8 +78,7 @@ class TravelPackageResource extends Resource
                     ->options([
                         'International Package' => 'International Package',
                         'Lombok Package' => 'Lombok Package',
-                        'Rinjani Package' => 'Rinjani Package',
-                        'Sembalun Package' => 'Sembalun Package',
+                        'Rinjani & Sembalun Package' => 'Rinjani & Sembalun Package',
                         'Honeymoon Package' => 'Honeymoon Package',
                         'Other' => 'Other',
                     ])

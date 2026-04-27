@@ -9,7 +9,7 @@ class TravelPackageController extends Controller
 {
     public function index(Request $request)
     {
-        $orderedGroups = ['International Package', 'Rinjani Package', 'Sembalun Package', 'Lombok Package', 'Honeymoon Package', 'Other'];
+        $orderedGroups = ['International Package', 'Rinjani & Sembalun Package', 'Lombok Package', 'Honeymoon Package', 'Other'];
 
         $selectedGroup = $request->get('group');
 
