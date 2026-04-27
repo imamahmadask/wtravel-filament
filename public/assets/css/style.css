@@ -1259,4 +1259,221 @@ body.dark-theme {
     }
 }
 
+/*=============== TESTIMONIALS ===============*/
+.testimonial {
+    background: linear-gradient(
+        135deg,
+        hsl(228, 100%, 97%) 0%,
+        hsl(228, 62%, 93%) 100%
+    );
+}
+
+.dark-theme .testimonial {
+    background: linear-gradient(
+        135deg,
+        hsl(228, 16%, 10%) 0%,
+        hsl(228, 16%, 14%) 100%
+    );
+}
+
+/* Rating Banner */
+.testimonial__rating-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background: var(--container-color);
+    border-radius: 1rem;
+    padding: 1.25rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px hsla(228, 66%, 45%, 0.08);
+    flex-wrap: wrap;
+}
+
+.testimonial__rating-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.testimonial__google-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--title-color);
+}
+
+.testimonial__rating-score {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.testimonial__big-rating {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--title-color);
+    line-height: 1;
+}
+
+.testimonial__stars {
+    display: flex;
+    gap: 2px;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.testimonial__total {
+    font-size: 0.75rem;
+    color: var(--text-color);
+}
+
+/* Swiper Container */
+.testimonial__container {
+    padding: 1rem 0 4rem; /* bottom space for the nav buttons */
+}
+
+/* Card */
+.testimonial__card {
+    background: var(--container-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px hsla(228, 66%, 45%, 0.08);
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.testimonial__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px hsla(228, 66%, 45%, 0.15);
+}
+
+.testimonial__card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Reviewer Avatar */
+.testimonial__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--first-color-lighten);
+}
+
+.testimonial__avatar-initials {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        var(--first-color),
+        var(--first-color-alt)
+    );
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+
+.testimonial__author-info {
+    flex: 1;
+}
+
+.testimonial__author-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin-bottom: 0.1rem;
+}
+
+.testimonial__date {
+    font-size: 0.75rem;
+    color: var(--text-color-light);
+}
+
+.testimonial__google-icon {
+    margin-left: auto;
+    flex-shrink: 0;
+    opacity: 0.85;
+}
+
+/* Stars Row */
+.testimonial__stars-row {
+    display: flex;
+    gap: 2px;
+}
+
+/* Review Text */
+.testimonial__text {
+    font-size: 0.813rem;
+    color: var(--text-color);
+    line-height: 1.6;
+    flex: 1;
+}
+
+/* Navigation overrides for testimonial swiper */
+/* Let global bottom:0 + centered left/right apply — just reset the side override */
+.testimonial__next,
+.testimonial__prev {
+    top: initial;
+    bottom: 0;
+    transform: none;
+}
+
+.testimonial__prev {
+    left: calc(50% - 3rem);
+}
+.testimonial__next {
+    right: calc(50% - 3rem);
+}
+
+/* Pagination dots — outside swiper, centered row below the nav buttons */
+.testimonial__pagination {
+    position: relative !important;
+    bottom: auto !important;
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.swiper-pagination-bullet {
+    background: var(--first-color);
+    opacity: 0.4;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: var(--first-color);
+}
+
+/* CTA button */
+.testimonial__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+}
+
+@media screen and (min-width: 768px) {
+    .testimonial__rating-banner {
+        gap: 3rem;
+    }
+    .testimonial__big-rating {
+        font-size: 3.5rem;
+    }
+}
+
 /*# sourceMappingURL=style.css.map */

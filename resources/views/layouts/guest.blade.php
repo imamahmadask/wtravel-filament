@@ -45,10 +45,17 @@
                         </a>
                     </li>
                     <li class="nav__item">
+                        <a href="{{ request()->is('/') ? '#testimonials' : route('homepage') . '#testimonials' }}"
+                            class="nav__link {{ request()->is('/') && request()->has('section') && request()->get('section') === 'testimonials' ? ' active-link' : '' }}">
+                            <i class="bx bx-star"></i>
+                            <span>Reviews</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
                         <a href="{{ route('blog.index') }}"
                             class="nav__link {{ request()->is('blogs') || request()->is('blogs/*') ? ' active-link' : '' }}">
                             <i class="bx bx-award"></i>
-                            <span>Blog</span>
+                            <span>Blogs</span>
                         </a>
                     </li>
                     <li class="nav__item">
